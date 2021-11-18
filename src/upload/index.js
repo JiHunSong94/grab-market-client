@@ -1,11 +1,21 @@
-import { Form, Divider, Input, InputNumber, Button, Upload } from 'antd';
+import {
+  Form,
+  Divider,
+  Input,
+  InputNumber,
+  Button,
+  Upload,
+  message,
+} from 'antd';
 import './index.css';
 import { useState } from 'react';
 import { API_URL } from '../config/constants.js';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function UploadPage() {
   const [imageUrl, setImageUrl] = useState(null); // imageUrl의 기본값으로 null. "순서" 이미지를 업로드 하였을 때 밑에 onChage함수가 불리면서 콜백에 들어간 인자 'info'를 이용해서 state를 업데이트 시켜준다.
+  const history = useHistory(); //react 훅?
   const onSubmit = (values) => {
     // values를 활용해서 상품정보를 node 서버에 올린다.
     axios
@@ -18,6 +28,11 @@ function UploadPage() {
       })
       .then((result) => {
         console.log(result);
+        history.replace('/'); //history.push를 하게 되면 이전페이지로 간다. replace를 하게 되면 이전 페이지의 기록이 사라진다. 1번페이지, 2번페이지, 3번페이지 보고 replace를 하면 1번페이지로 간다.
+      })
+      .catch((error) => {
+        console.error(error);
+        message.error(`에러가 발생했습니다. ${error.message}`);
       });
   };
   const onChangeImage = (info) => {

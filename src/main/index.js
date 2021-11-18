@@ -26,7 +26,7 @@ function MainPage() {
       <div id="banner">
         <img src="/images/banners/banner1.png" alt="배너" />
       </div>
-      <h1>판매되는 상품들</h1>
+      <h1 id="product-headline">판매되는 상품들</h1>
       <div id="product-list">
         {products.map(function (product, index) {
           return (
@@ -38,7 +38,7 @@ function MainPage() {
                 <div>
                   <img
                     className="product-img"
-                    src={product.imageUrl}
+                    src={`${API_URL}/${product.imageUrl}`}
                     alt="상품 이미지"
                   />
                 </div>
