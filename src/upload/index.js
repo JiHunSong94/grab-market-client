@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 function UploadPage() {
   const [imageUrl, setImageUrl] = useState(null); // imageUrl의 기본값으로 null. "순서" 이미지를 업로드 하였을 때 밑에 onChage함수가 불리면서 콜백에 들어간 인자 'info'를 이용해서 state를 업데이트 시켜준다.
   const history = useHistory(); //react 훅?
+
   const onSubmit = (values) => {
     // values를 활용해서 상품정보를 node 서버에 올린다.
     axios
