@@ -25,6 +25,17 @@
   border: 1px solid rgb(230, 230, 230);
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
+}
+
+.product-blur {
+  position: absolute; /* 원래 div로 구분하면 각자 본인의 영역을 지키면서 자리를 잡고 추가가 되지만 absolute를 적용하면 자기 옆에 있는 태그들과 상관없이 부모만 바라본다. */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffffaa;
+  pointer-events: none; /* 이 blur 태그는 클릭을 먹기 때문에 링크가 안 먹힌다. pointer로 하는 이밴트를 여기서는 처리하지 않겠다는 코드 */
 }
 
 .product-img {

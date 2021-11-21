@@ -53,6 +53,9 @@ function MainPage() {
         {products.map(function (product, index) {
           return (
             <div className="product-card">
+              {
+                product.soldout === 1 && <div className="product-blur" /> // 여기서 product는 위에서 map으로 순회하고 있는 product객체다.
+              }
               <Link
                 style={{ color: 'inherit' }}
                 className="product-link"
