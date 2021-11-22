@@ -32,8 +32,9 @@ body,
 }
 
 #body {
-  height: 100vh;
-  width: 1024px;
+  min-height: 100vh;
+  max-width: 1024px; /* 데스크탑이나 큰 화면에서는 1024px로 고정이 되고 */
+  width: 100%; /* 모바일의 경우에는 max-width와 상관없이 width를 쫓아가게 된다. */
   margin: 0 auto;
   padding-bottom: 24px;
 }
@@ -41,4 +42,23 @@ body,
 #footer {
   height: 200px;
   background-color: rgb(230, 230, 230);
+}
+
+@media screen and (max-width: 400px) {
+  /* media query는 조건에 따라 다른 css를 적용 가능하게 한다. 모바일에서 거의 너비가 400px이내로 잡히기 때문에 너비가 400px이내에는 이 css를 적용하겠다라는 뜻 */
+  .product-card {
+    width: 160px !important; /* 모바일(앱)기준으로는 160px로 잡힌다.
+    여러 css에서 같은 이름의 셀렉터 중복이 있을 수 있기 때문에 가장 마지막에 불린 셀렉터(지금 여기)를 기준으로 잡는다는 뜻 | !important가 없다면 /main에 있는 css에 product-card 기준이 된다.
+    꼭 필요한 상황이 아니면 추천 x (코드가 지저분 해진다.) */
+  }
+  #header {
+    padding: 0 8px; /* 좌,우 끝쪽만 8px padding 들어감 */
+  }
+  #body {
+    padding: 0 8px;
+  }
+  .ant-carousel {
+    /* 배너에 적용된 antd에 기본적으로 부여된 class다 */
+    margin: 0 -8px; /* 위에서 body에서 padding으로 8px을 줄였지만 다시 줄여서 꽉차게 만든다. */
+  }
 }
