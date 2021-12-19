@@ -6,7 +6,11 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { API_URL } from '../config/constants.js';
 import { Carousel } from 'antd';
+import 'dayjs/locale/ko';
+import ProductCard from '../components/productsCard';
+
 dayjs.extend(relativeTime);
+dayjs.locale('ko');
 
 function MainPage() {
   // 상품 정보를 받아오는 로직
@@ -52,41 +56,9 @@ function MainPage() {
       <div id="product-list">
         {products.map(function (product, index) {
           return (
-            <div className="product-card">
-              {
-                product.soldout === 1 && <div className="product-blur" /> // 여기서 product는 위에서 map으로 순회하고 있는 product객체다.
-              }
-              <Link
-                style={{ color: 'inherit' }}
-                className="product-link"
-                to={`/products/${product.id}`}>
-                <div>
-                  <img
-                    className="product-img"
-                    src={`${API_URL}/${product.imageUrl}`}
-                    alt="상품 이미지"
-                  />
-                </div>
-                <div className="product-contents">
-                  <span className="product-name">{product.name}</span>
-                  <span className="product-price">{product.price}원</span>
-                  <div className="product-footer">
-                    <div className="product-seller">
-                      <img
-                        className="product-avatar"
-                        src="images/icons/avatar.png"
-                        alt="아바타"
-                      />
-                      <span>{product.seller}</span>
-                    </div>
-                    <span className="product-date">
-                      {dayjs(product.createdAt).fromNow()}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          );
+            <ProductCard product={product} key={index} />
+          ); /* products={product}는 props 설정 - 컴포넌트 자식에서 속성을 준다. - 자식 product에 부모 product 속성을 넣는다.
+Product 컴포넌트의 집합을 관리하기 위해서 key를 넣어준다. 컴포넌트가 각각 나열될 때마다 서로 다른 key를 가지고 있다고 인지시켜주는 것. 성능의 최적화 된다.*/
         })}
       </div>
     </div>
